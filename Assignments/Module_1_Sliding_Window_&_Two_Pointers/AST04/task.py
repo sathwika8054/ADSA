@@ -1,29 +1,23 @@
-def pairInSortedRotated(arr, target):
+def pairInSortedRotated(arr, target):  
    n = len(arr)
+   small = 0
+   for i in range(n):
+        if arr[i] < arr[small]:
+            small = i
+   big = (small - 1 + n) % n
 
-   if n < 2:
-      return False
+   while small != big:
+        total = arr[small] + arr[big]
 
-   pivot = 0
-   for i in range(n - 1):
-      if arr[i] > arr[i + 1]:
-         pivot = i + 1
-         break
-   left = pivot
-   right = (pivot - 1 + n) % n
+        if total == target:
+            return True
 
-   while left != right:
-      current_sum = arr[left] + arr[right]
-
-      if current_sum == target:
-         return True
-      elif current_sum < target:
-         left = (left + 1) % n
-      else:
-         right = (right - 1 + n) % n
+        if total < target:
+            small = (small + 1) % n
+        else:
+            big = (big - 1 + n) % n
 
    return False
-
 
 
 if __name__ == '__main__':
