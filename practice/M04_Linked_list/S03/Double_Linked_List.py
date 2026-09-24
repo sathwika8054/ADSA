@@ -67,9 +67,11 @@ def insert_end(head,data):
     curr.next=new_node
     new_node.prev=curr.next
     return head
-def insert_at_post(head,data):
+def insert_at_post(node,data):
+    if node is None:
+        print("error")
+        return 
     
-
 def traverse(head):
     curr=head
     while curr:
