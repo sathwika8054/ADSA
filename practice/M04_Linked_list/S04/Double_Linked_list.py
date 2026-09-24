@@ -3,7 +3,6 @@ class Node:
         self.data = data
         self.prev = None
         self.next = None
-
 class Double_LL:
     def __init__(self):
         self.head = None
@@ -25,7 +24,6 @@ class Double_LL:
             curr = curr.next
         curr.next = new_node
         new_node.prev = curr
-
     def count_nodes(self):
         temp = self.head
         count = 0
@@ -33,15 +31,11 @@ class Double_LL:
             count += 1
             temp = temp.next
         return count
-
     def insert_at_a_position(self, data, pos):
         if pos < 1 or pos > self.count_nodes() + 1:
             print(f"Invalid position: {pos}")
             return
-
         new_node = Node(data)
-
-        # Insert at the beginning
         if pos == 1:
             new_node.next = self.head
             if self.head:
@@ -52,92 +46,41 @@ class Double_LL:
         curr = self.head
         for _ in range(1, pos - 1):
             curr = curr.next
-
         new_node.next = curr.next
         new_node.prev = curr
         if curr.next:
             curr.next.prev = new_node
         curr.next = new_node
-
     def delete_begin(self):
         if self.head is None:
             print("List is empty. Nothing to delete.")
             return
-
         self.head = self.head.next
         if self.head:
             self.head.prev = None
-
     def delete_end(self):
         if self.head is None:
             print("List is empty. Nothing to delete.")
             return
-
         if self.head.next is None:
             self.head = None
             return
-
         curr = self.head
         while curr.next:
             curr = curr.next
         curr.prev.next = None
-
-    def delete_at_position(self, pos):
-        if self.head is None:
-            print("List is empty. Nothing to delete.")
-            return
-
-        if pos < 1 or pos > self.count_nodes():
-            print(f"Invalid position: {pos}")
-            return
-
-        if pos == 1:
-            self.delete_begin()
-            return
-
-        curr = self.head
-        for _ in range(1, pos):
-            curr = curr.next
-
-        curr.prev.next = curr.next
-        if curr.next:
-            curr.next.prev = curr.prev
-
-    def delete_by_value(self, key):
-        if self.head is None:
-            print("List is empty.")
-            return
-
-        curr = self.head
-        if curr.data == key:
-            self.delete_begin()
-            return
-
-        while curr and curr.data != key:
-            curr = curr.next
-
-        if curr is None:
-            print(f"Value {key} not found in list.")
-            return
-
-        curr.prev.next = curr.next
-        if curr.next:
-            curr.next.prev = curr.prev
-
     def traverse(head):
         curr = head
         while curr:
             print(curr.data, end=" <-> ")
             curr = curr.next 
         print("None")
-
 head = None
 head = Double_LL.insert_begin(head, 10)
 head = Double_LL.insert_begin(head, 20)
 head = Double_LL.insert_begin(head, 30)
 head = Double_LL.insert_begin(head, 40)
 head = Double_LL.insert_begin(head, 50)
-
 print("Insertion at the beginning:")
 Double_LL.traverse(head)
 print()
@@ -166,11 +109,3 @@ dll.delete_end()
 Double_LL.traverse(dll.head)
 print()
 
-print("Delete node at position 3:")
-dll.delete_at_position(3)
-Double_LL.traverse(dll.head)
-print()
-
-print("Delete node with value 99:")
-dll.delete_by_value(99)
-Double_LL.traverse(dll.head)
